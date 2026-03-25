@@ -20,34 +20,34 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     @Override
     public EmployeePayrollData getEmployeePayrollDataById(int empId) {
         return employeeList.stream()
-                .filter(emp -> emp.getId() == empId)
+                .filter(employee -> employee.getId() == empId)
                 .findFirst()
                 .orElse(null);
     }
 
     @Override
     public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
-        EmployeePayrollData employee = new EmployeePayrollData(
+        EmployeePayrollData newEmployee = new EmployeePayrollData(
                 employeeList.size() + 1,
                 employeePayrollDTO.getName(),
                 employeePayrollDTO.getSalary()
         );
-        employeeList.add(employee);
-        return employee;
+        employeeList.add(newEmployee);
+        return newEmployee;
     }
 
     @Override
     public EmployeePayrollData updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO) {
-        EmployeePayrollData employee = getEmployeePayrollDataById(empId);
-        if (employee != null) {
-            employee.setName(employeePayrollDTO.getName());
-            employee.setSalary(employeePayrollDTO.getSalary());
+        EmployeePayrollData employeeData = this.getEmployeePayrollDataById(empId);
+        if (employeeData != null) {
+            employeeData.setName(employeePayrollDTO.getName());
+            employeeData.setSalary(employeePayrollDTO.getSalary());
         }
-        return employee;
+        return employeeData;
     }
 
     @Override
     public void deleteEmployeePayrollData(int empId) {
-        employeeList.removeIf(emp -> emp.getId() == empId);
+        employeeList.removeIf(employee -> employee.getId() == empId);
     }
 }
