@@ -6,28 +6,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
 
-    @GetMapping("/")
-    public String getEmployeePayrollData() {
-        return "Get Call Success";
+    @GetMapping("/hello")
+    public String hello() {
+        return "Employee Payroll REST Service";
     }
 
     @GetMapping("/get")
-    public String getEmployeeData() {
-        return "Returned Employee Payroll Data";
+    public String getEmployee(@RequestParam(value = "name", defaultValue = "Employee") String name) {
+        return "Hello " + name;
     }
 
     @PostMapping("/create")
-    public String createEmployeePayrollData() {
-        return "Created Employee Payroll Data Successfully";
+    public String createEmployee(@RequestParam String name) {
+        return "Created employee: " + name;
     }
 
-    @PutMapping("/update")
-    public String updateEmployeePayrollData() {
-        return "Updated Employee Payroll Data Successfully";
+    @PutMapping("/update/{name}")
+    public String updateEmployee(@PathVariable String name,
+                                 @RequestParam(value = "newName") String newName) {
+        return "Updated employee " + name + " to " + newName;
     }
 
-    @DeleteMapping("/delete")
-    public String deleteEmployeePayrollData() {
-        return "Deleted Employee Payroll Data Successfully";
+    @DeleteMapping("/delete/{name}")
+    public String deleteEmployee(@PathVariable String name) {
+        return "Deleted employee: " + name;
     }
 }
