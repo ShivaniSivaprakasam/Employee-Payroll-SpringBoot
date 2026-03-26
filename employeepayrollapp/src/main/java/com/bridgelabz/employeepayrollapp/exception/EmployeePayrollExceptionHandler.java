@@ -24,4 +24,14 @@ public class EmployeePayrollExceptionHandler {
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EmployeePayrollException.class)
+    public ResponseEntity<Map<String, String>> handleEmployeePayrollException(
+            EmployeePayrollException exception) {
+
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", exception.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 }

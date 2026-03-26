@@ -1,6 +1,7 @@
 package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeePayrollDTO;
+import com.bridgelabz.employeepayrollapp.exception.EmployeePayrollException;
 import com.bridgelabz.employeepayrollapp.model.EmployeePayrollData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         return employeeList.stream()
                 .filter(employee -> employee.getId() == empId)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new EmployeePayrollException("Employee with id " + empId + " not found"));
     }
 
     @Override
@@ -46,24 +47,17 @@ public class EmployeePayrollService implements IEmployeePayrollService {
     public EmployeePayrollData updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO) {
         log.info("Updating employee payroll data for id: {}", empId);
         EmployeePayrollData employeeData = this.getEmployeePayrollDataById(empId);
-        if (employeeData != null) {
-            employeeData.setName(employeePayrollDTO.getName());
-            employeeData.setSalary(employeePayrollDTO.getSalary());
-            log.info("Employee updated successfully: {}", employeeData);
-        } else {
-            log.warn("Employee with id {} not found", empId);
-        }
+        employeeData.setName(employeePayrollDTO.getName());
+        employeeData.setSalary(employeePayrollDTO.getSalary());
+        log.info("Employee updated successfully: {}", employeeData);
         return employeeData;
     }
 
     @Override
     public void deleteEmployeePayrollData(int empId) {
         log.info("Deleting employee payroll data for id: {}", empId);
-        boolean removed = employeeList.removeIf(employee -> employee.getId() == empId);
-        if (removed) {
-            log.info("Employee deleted successfully for id: {}", empId);
-        } else {
-            log.warn("Employee with id {} not found", empId);
-        }
+        EmployeePayrollData employeeData = this.getEmployeePayrollDataById(empId);
+        employeeList.remove(employeeData);
+        log.info("Employee deleted successfully for id: {}", empId);
     }
 }
