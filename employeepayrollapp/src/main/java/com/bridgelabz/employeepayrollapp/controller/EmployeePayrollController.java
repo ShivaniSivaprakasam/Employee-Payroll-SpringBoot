@@ -31,22 +31,31 @@ public class EmployeePayrollController {
     }
 
     @PostMapping("/create")
-    public EmployeePayrollData createEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
+    public EmployeePayrollData createEmployeePayrollData(
+            @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
+
         log.info("Creating employee payroll data: {}", employeePayrollDTO);
         return employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
     }
 
     @PutMapping("/update/{empId}")
-    public EmployeePayrollData updateEmployeePayrollData(@PathVariable int empId,
-                                                         @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
-        log.info("Updating employee payroll data for id: {} with data: {}", empId, employeePayrollDTO);
+    public EmployeePayrollData updateEmployeePayrollData(
+            @PathVariable int empId,
+            @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
+
+        log.info("Updating employee payroll data for id: {} with data: {}",
+                empId, employeePayrollDTO);
+
         return employeePayrollService.updateEmployeePayrollData(empId, employeePayrollDTO);
     }
 
     @DeleteMapping("/delete/{empId}")
     public String deleteEmployeePayrollData(@PathVariable int empId) {
+
         log.info("Deleting employee payroll data for id: {}", empId);
+
         employeePayrollService.deleteEmployeePayrollData(empId);
+
         return "Deleted employee payroll data for id: " + empId;
     }
 }
