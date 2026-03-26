@@ -1,20 +1,22 @@
 # Employee Payroll Spring Boot Application
 
-# Project Overview
-This project demonstrates the development of a **Spring Boot Backend Application** for the **Employee Payroll System**. The application is built to handle **REST API requests** and demonstrates various **HTTP methods**.
+## Overview
 
-This project is developed as part of the **BridgeLabz Learning Program**.
+This project demonstrates building a **Spring Boot Backend Application** for the **Employee Payroll System**.  
+The application supports REST APIs, Logging, Validation, Spring Profiles and Exception Handling.
 
 ---
 
 # Tech Stack
 
-- Java 17  
-- Spring Boot  
-- Maven  
-- REST API  
-- MySQL (Configured in UC2)  
-- IntelliJ IDEA  
+- Java
+- Spring Boot
+- Maven
+- Lombok
+- Spring Validation
+- Spring Profiles
+- REST API
+- IntelliJ IDEA
 
 ---
 
@@ -23,52 +25,34 @@ This project is developed as part of the **BridgeLabz Learning Program**.
 ```
 employeepayrollapp
 │
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com.bridgelabz.employeepayrollapp
-│   │   │       ├── controller
-│   │   │       ├── dto
-│   │   │       ├── model
-│   │   │       ├── service
-│   │   │       └── EmployeepayrollappApplication.java
-│   │   │
-│   │   └── resources
-│   │       └── application.properties
-│   │
-│   └── test
+├── controller
+├── dto
+├── model
+├── service
+├── exception
+├── resources
+│   ├── application.properties
+│   ├── application-dev.properties
+│   ├── application-prod.properties
 │
-├── pom.xml
-└── README.md
+└── EmployeepayrollappApplication.java
 ```
 
 ---
 
-# UC1 — Create Employee Payroll Spring Project
+# UC1 : Create Employee Payroll Spring Project
 
 ## Objective
-Create a Spring Boot Project to cater to REST request from Employee Payroll UI.
 
-## Tasks Completed
+Create Spring Boot Application to handle REST Calls
 
-- Created Spring Boot Project  
-- Configured Maven Dependencies  
-- Created Main Application Class  
-- Created REST Controller  
-- Implemented Basic GET API  
-- Tested REST API using Browser  
-
----
-
-# UC1 REST Endpoint
-
-## GET Method
+### Endpoint
 
 ```
 GET /payroll
 ```
 
-## Sample Response
+Response
 
 ```
 Employee Payroll App is Running
@@ -76,264 +60,215 @@ Employee Payroll App is Running
 
 ---
 
-# UC2 — REST Controller HTTP Methods
+# UC2 : REST Controller HTTP Methods
 
-## Objective
+Implemented REST APIs
 
-Create REST Controller to demonstrate various HTTP methods:
-
-- GET  
-- POST  
-- PUT  
-- DELETE  
-
----
-
-# Dependencies Added
-
-- Spring Web  
-- Spring Validation  
-- Spring Data JPA  
-- MySQL Driver  
-- Spring Boot DevTools  
-
----
-
-# HTTP Methods Implemented
-
-## GET
 ```
-GET /employeepayrollservice/
-```
-
-## GET by ID
-```
-GET /employeepayrollservice/get/{empId}
-```
-
-## POST
-```
-POST /employeepayrollservice/create
-```
-
-## PUT
-```
-PUT /employeepayrollservice/update/{empId}
-```
-
-## DELETE
-```
-DELETE /employeepayrollservice/delete/{empId}
+GET     /employeepayrollservice/
+GET     /employeepayrollservice/get/{empId}
+POST    /employeepayrollservice/create
+PUT     /employeepayrollservice/update/{empId}
+DELETE  /employeepayrollservice/delete/{empId}
 ```
 
 ---
 
-# UC3 — Introduced DTO and Model Layer
+# UC3 : Introduce DTO and Model
 
-## Objective
+Created
 
-Introduce DTO and Model classes for Employee Payroll App.
+- EmployeePayrollDTO
+- EmployeePayrollData
 
-## Tasks Completed
-
-- Created DTO Layer  
-- Created Model Layer  
-- Implemented Object-Based REST APIs  
-- Added RequestBody Handling  
-- Returned JSON Responses  
+Used DTO for Request  
+Used Model for Response
 
 ---
 
-# DTO Class
+# UC4 : Service Layer
 
-EmployeePayrollDTO
+Created
 
-Fields:
+- IEmployeePayrollService
+- EmployeePayrollService
 
-- name  
-- salary  
-
-Purpose:
-
-Used to receive data from REST request.
+Controller communicates with Service Layer
 
 ---
 
-# Model Class
+# UC5 : Store Data in Memory
 
-EmployeePayrollData
-
-Fields:
-
-- id  
-- name  
-- salary  
-
-Purpose:
-
-Used as response object from REST API.
-
----
-
-# UC3 Controller Changes
-
-- POST accepts DTO  
-- PUT accepts DTO  
-- Controller returns Model object  
-- JSON response enabled  
-
----
-
-# UC4 — Introduced Service Layer
-
-## Objective
-
-Introduce Service Layer to handle business logic.
-
-## Tasks Completed
-
-- Created Service Interface  
-- Created Service Implementation  
-- Used Dependency Injection  
-- Moved Business Logic to Service Layer  
-- Controller calls Service  
-
----
-
-# Service Layer Files
-
-Created:
-
-```
-IEmployeePayrollService.java
-EmployeePayrollService.java
-```
-
----
-
-# Dependency Injection
-
-Used:
-
-```
-@Autowired
-private IEmployeePayrollService employeePayrollService;
-```
-
----
-
-# Architecture After UC4
-
-```
-Controller → Service → Model
-```
-
----
-
-# UC5 — Store Employee Payroll Data in Memory
-
-## Objective
-
-Allow Service Layer to store employee data in memory.
-
----
-
-# Tasks Completed
-
-- Created in-memory List  
-- Implemented Create Employee  
-- Implemented Get All Employees  
-- Implemented Get Employee By ID  
-- Implemented Update Employee  
-- Implemented Delete Employee  
-
----
-
-# In-Memory Storage
-
-Used:
+Used
 
 ```
 List<EmployeePayrollData> employeeList
 ```
 
----
+Operations
 
-# UC5 Functionalities
-
-## Create Employee
-
-- Adds employee to list  
-- Auto generates ID  
+- Add Employee
+- Update Employee
+- Delete Employee
+- Get Employee
 
 ---
 
-## Get All Employees
+# UC6 : Lombok
 
-Returns all employee records.
-
----
-
-## Get Employee by ID
-
-Searches employee list.
-
----
-
-## Update Employee
-
-Updates employee data in list.
-
----
-
-## Delete Employee
-
-Removes employee from list.
-
----
-
-# Architecture After UC5
+Added Lombok
 
 ```
-Controller → Service → In-Memory List
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 ```
 
 ---
 
-# MySQL Configuration
+# UC7 : Logging
+
+Added logging
+
+```
+@Slf4j
+```
+
+Example
+
+```
+log.info("Creating employee");
+log.error("Error occurred");
+```
+
+---
+
+# UC8 : Spring Profiles
+
+Created
+
+```
+application.properties
+application-dev.properties
+application-prod.properties
+```
 
 application.properties
 
 ```
-spring.datasource.url=jdbc:mysql://localhost:3306/payroll_service
-spring.datasource.username=root
-spring.datasource.password=your_password
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.profiles.active=dev
+```
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+application-dev.properties
+
+```
+logging.level.root=INFO
+```
+
+application-prod.properties
+
+```
+logging.level.root=ERROR
 ```
 
 ---
 
-# Database Setup
+# UC9 : Validation
+
+Added validation
 
 ```
-create database payroll_service;
+@NotEmpty
+@Pattern
+```
+
+Example
+
+```
+@NotEmpty(message="Name cannot be empty")
+@Pattern(regexp="^[A-Z][a-zA-Z\\s]{2,}$")
+```
+
+Validation added for
+
+- Create API
+- Update API
+
+---
+
+# UC10 : Custom Validation Exception
+
+Created
+
+```
+@ControllerAdvice
+```
+
+Handled
+
+```
+MethodArgumentNotValidException
+```
+
+Example Response
+
+```
+{
+ "name":"Employee name cannot be empty"
+}
 ```
 
 ---
 
-# Running Application
+# UC11 : Employee Not Found Exception
 
-Run:
+Created
+
+```
+EmployeePayrollException
+```
+
+Thrown
+
+```
+throw new EmployeePayrollException("Employee not found")
+```
+
+Handled using
+
+```
+@ExceptionHandler
+```
+
+Response
+
+```
+{
+ "message":"Employee with id not found"
+}
+```
+
+---
+
+# Dependencies
+
+- Spring Boot Starter Web
+- Spring Boot DevTools
+- Lombok
+- Validation
+- Spring Boot Starter
+
+---
+
+# Run Application
+
+Run
 
 ```
 EmployeepayrollappApplication.java
 ```
 
-Server Starts:
+Server Starts
 
 ```
 Tomcat started on port 8080
@@ -343,7 +278,7 @@ Tomcat started on port 8080
 
 # Testing REST APIs
 
-## Browser
+Browser
 
 ```
 http://localhost:8080/employeepayrollservice/
@@ -351,37 +286,27 @@ http://localhost:8080/employeepayrollservice/
 
 ---
 
-# cURL Commands
+# CURL Examples
 
-## Create
-
-```
-curl -X POST http://localhost:8080/employeepayrollservice/create \
--H "Content-Type: application/json" \
--d "{\"name\":\"Shivani\",\"salary\":50000}"
-```
-
----
-
-## Get All
+Create
 
 ```
-curl http://localhost:8080/employeepayrollservice/
+curl -X POST http://localhost:8080/employeepayrollservice/create
 ```
 
----
-
-## Update
+Get
 
 ```
-curl -X PUT http://localhost:8080/employeepayrollservice/update/1 \
--H "Content-Type: application/json" \
--d "{\"name\":\"Shivani\",\"salary\":60000}"
+curl http://localhost:8080/employeepayrollservice/get/1
 ```
 
----
+Update
 
-## Delete
+```
+curl -X PUT http://localhost:8080/employeepayrollservice/update/1
+```
+
+Delete
 
 ```
 curl -X DELETE http://localhost:8080/employeepayrollservice/delete/1
@@ -391,53 +316,37 @@ curl -X DELETE http://localhost:8080/employeepayrollservice/delete/1
 
 # Git Branches
 
-## UC1
-
 ```
-feature/UC1-employee-payroll-rest-api
-```
-
-## UC2
-
-```
-feature/UC2-rest-controller-http-methods
-```
-
-## UC3
-
-```
-feature/UC3-introduce-dto-and-model
-```
-
-## UC4
-
-```
-feature/UC4-introduce-service-layer
-```
-
-## UC5
-
-```
-feature/UC5-store-employee-payroll-in-memory
+feature/UC1-create-project
+feature/UC2-rest-controller
+feature/UC3-dto-model
+feature/UC4-service-layer
+feature/UC5-memory-storage
+feature/UC6-lombok
+feature/UC7-logging
+feature/UC8-spring-profiles
+feature/UC9-validation
+feature/UC10-custom-exception
+feature/UC11-employee-not-found
 ```
 
 ---
 
 # Learning Outcomes
 
-- Spring Boot Setup  
-- REST API Development  
-- DTO Layer  
-- Model Layer  
-- Service Layer  
-- Dependency Injection  
-- In-Memory Data Storage  
-- HTTP Methods Implementation  
-- Maven Dependency Management  
-- Git Feature Branch Workflow  
+- Spring Boot Setup
+- REST API Development
+- DTO & Model
+- Service Layer
+- In Memory Storage
+- Lombok
+- Logging
+- Spring Profiles
+- Validation
+- Exception Handling
 
 ---
 
 # Author
 
-**Shivani S**  
+Shivani S  
